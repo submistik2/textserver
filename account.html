@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="account">Аккаунт</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+  <div class="container">
+    <nav>
+      <a href="index.html" data-i18n="files">Файлы</a>
+      <a href="profile.html" data-i18n="profile">Профиль</a>
+      <a href="settings.html" data-i18n="settings">Настройки</a>
+      <button onclick="logoutUser()" data-i18n="signOut">Выйти</button>
+    </nav>
+
+    <h2 data-i18n="account">Управление аккаунтом</h2>
+    <div id="account-content">
+      <div class="form-group">
+        <label data-i18n="newEmail">Новый email</label>
+        <input type="email" id="newEmail">
+        <button class="btn" onclick="changeEmail()">→</button>
+      </div>
+
+      <div class="form-group">
+        <label data-i18n="newPassword">Новый пароль</label>
+        <input type="password" id="newPassword">
+        <button class="btn" onclick="changePassword()">→</button>
+      </div>
+
+      <button class="btn" style="background-color:#d32f2f;" onclick="reauthAndDeleteAccount()" data-i18n="deleteAccount">Удалить аккаунт</button>
+    </div>
+    <button onclick="window.location.href='index.html'" data-i18n="backToFiles"></button>
+  </div>
+
+  <script type="module" src="utils.js"></script>
+  <script>
+    function changeEmail() {
+      const email = document.getElementById('newEmail').value;
+      if (email) reauthAndChangeEmail(email);
+    }
+    function changePassword() {
+      const pass = document.getElementById('newPassword').value;
+      if (pass) reauthAndChangePassword(pass);
+    }
+  </script>
+</body>
+</html>
