@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="settings">Настройки</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+  <div class="container">
+    <nav>
+      <a href="index.html" data-i18n="files">Файлы</a>
+      <a href="profile.html" data-i18n="profile">Профиль</a>
+      <a href="settings.html" data-i18n="settings">Настройки</a>
+      <button onclick="logoutUser()" data-i18n="signOut">Выйти</button>
+    </nav>
+
+    <h2 data-i18n="settings">Настройки</h2>
+    <div id="settings-content">
+      <h3 data-i18n="theme">Тема</h3>
+      <button class="btn" onclick="setTheme('dark')" data-i18n="dark">Тёмная</button>
+      <button class="btn" onclick="setTheme('gray')" data-i18n="gray">Серая</button>
+      <button class="btn" onclick="setTheme('light')" data-i18n="light">Светлая</button>
+
+      <h3 data-i18n="language">Язык</h3>
+      <button class="btn" onclick="setLanguage('ru')">🇷🇺 Русский</button>
+      <button class="btn" onclick="setLanguage('en')">🇺🇸 English</button>
+      <button class="btn" onclick="setLanguage('uz')">🇺🇿 O‘zbek</button>
+      <button class="btn" onclick="setLanguage('tk')">🇹🇲 Türkmen</button>
+      <button class="btn" onclick="setLanguage('de')">🇩🇪 Deutsch</button>
+      <button class="btn" onclick="setLanguage('es')">🇪🇸 Español</button>
+      <button class="btn" onclick="setLanguage('fr')">🇫🇷 Français</button>
+      <button class="btn" onclick="setLanguage('tr')">🇹🇷 Türkçe</button>
+      <button class="btn" onclick="setLanguage('ja')">🇯🇵 日本語</button>
+      <button class="btn" onclick="setLanguage('zh')">🇨🇳 中文</button>
+
+      <h3 data-i18n="account">Аккаунт</h3>
+      <a href="account.html" class="btn" data-i18n="account">Управление аккаунтом</a>
+    </div>
+    <button onclick="window.location.href='index.html'" data-i18n="backToFiles"></button>
+  </div>
+
+  <script type="module" src="utils.js"></script>
+</body>
+</html>
