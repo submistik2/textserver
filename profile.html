@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title data-i18n="profile">Профиль</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="theme-dark">
+  <div class="container">
+    <nav>
+      <a href="index.html" data-i18n="files">Файлы</a>
+      <a href="profile.html" data-i18n="profile">Профиль</a>
+      <a href="settings.html" data-i18n="settings">Настройки</a>
+      <button onclick="logoutUser()" data-i18n="signOut">Выйти</button>
+    </nav>
+
+    <h2 data-i18n="profile">Профиль</h2>
+    <div id="profile-content">Загрузка...</div>
+    <button onclick="window.location.href='index.html'" data-i18n="backToFiles"></button>
+  </div>
+
+  <script type="module">
+    import { auth, db } from './firebase.js';
+    import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+    import { currentLang } from './utils.js';
+    import { translations } from './translations.js';
+
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) return window.location.href = 'index.html';
+      const profileSnap = await getDoc(doc(db, "profiles", user.uid));
+      const data = profileSnap.data();
+      const createdAt = data.createdAt ? new Date(data.createdAt.seconds * 1000).toLocaleString() : '—';
+
+      document.getElementById('profile-content').innerHTML = `
+        <p><strong data-i18n="name">Имя</strong>: ${data.displayName || '—'}</p>
+        <p><strong data-i18n="email">Email</strong>: ${user.email}</p>
+        <p><strong data-i18n="registered">Дата регистрации</strong>: ${createdAt}</p>
+        <p><strong data-i18n="userId">ID пользователя</strong>: ${user.uid}</p>
+      `;
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        el.textContent = translations[currentLang][el.getAttribute('data-i18n')] || el.getAttribute('data-i18n');
+      });
+    });
+  </script>
+</body>
+</html>
